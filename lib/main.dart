@@ -7,6 +7,7 @@ import 'package:ramipartnerapp/screens/drawer.dart';
 import 'package:ramipartnerapp/screens/myprofile.dart';
 import 'package:ramipartnerapp/screens/myschedule.dart';
 import 'package:ramipartnerapp/screens/myworkinghours.dart';
+import 'package:ramipartnerapp/screens/providers/converttoaddress_provider.dart';
 import 'package:ramipartnerapp/screens/providers/facebooksigninprovider..dart';
 import 'package:ramipartnerapp/screens/providers/googlesigninprovider.dart';
 import 'package:ramipartnerapp/shareedpreference/share_preference.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<GoogleSignInProvider>(create: (context) => GoogleSignInProvider()),
         ChangeNotifierProvider<FacebookSignInProvider>(create: (context) => FacebookSignInProvider()),
+        ChangeNotifierProvider<ConvertLatLongToAddressProvider>(create: (context) => ConvertLatLongToAddressProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -61,4 +63,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 

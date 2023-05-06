@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:page_transition/page_transition.dart';
+import 'package:ramipartnerapp/model/schedule_model.dart';
 import '../screens/authentication/login_screen.dart';
 import '../screens/drawer.dart';
 import '../shareedpreference/share_preference.dart';
@@ -10,10 +11,14 @@ import '../shareedpreference/share_preference.dart';
 
 class ApiScreen {
 
-// TODO Creating a List of OrdersModel
-// List<MyVehicleModel> vehicleList = [];
 var data;
 bool isLoggedIn = false;
+
+// TODO List Of GetScheduleModelClass
+  List<GetScheduleModelClass> scheduleList = [];
+
+
+
 
 // TODO Add Partner
 addPartner(String? loginWith, methodUID, password, email, name, photoUrl,offset,
@@ -249,8 +254,11 @@ partnerLogin(String username, password, context) async {
   //   }
   // }
 
-// TODO mySchedule
-  mySchedule() async {
+
+
+
+  // TODO My Schedule
+  Stream<List<GetScheduleModelClass>> mySchedule() async* {
 
     print("Id is ${MySharedPrefClass.preferences?.getString("partnerID")}");
 
@@ -272,11 +280,15 @@ partnerLogin(String username, password, context) async {
         var data = jsonDecode(response.body.toString());
         print("Data $data");
         print("MySchedule Details");
+        for(var i in data){
+          scheduleList.add(GetScheduleModelClass.fromJson(i));
+        }
         Fluttertoast.showToast(
             msg: "MySchedule Details",
             backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 18);
+
       } else {
         print("Failed");
         Fluttertoast.showToast(
